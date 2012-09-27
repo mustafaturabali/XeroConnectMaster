@@ -1,0 +1,4 @@
+<apex:page controller="XeroController" action="{!completeAuthorisation}">
+    <apex:outputText rendered="{!authSuccess}" value="Authorisation successful"/>
+    <apex:outputText rendered="{!(!authSuccess)}" value="Not Authorised: {!message}"/>
+</apex:page>

@@ -1,0 +1,21 @@
+<apex:page controller="OpportunityExtension" tabStyle="Opportunity" action="{!showNewXeroInvoices}">
+<apex:pagemessages ></apex:pagemessages>
+  <apex:form >
+  <apex:pageBlock >
+ <apex:pageBlockTable value="{!XeroInvoicesEditable}" var="rec">
+    <apex:column >
+      <apex:inputCheckbox value="{!rec.IsSelected}"/>
+     </apex:column> 
+       <apex:column value="{!rec.InvoiceModel.InvoiceNumber}" headerValue="Invoice Number"/>
+        <apex:column value="{!rec.InvoiceModel.ContactName}" headerValue="Xero Account Name"/>
+         <apex:column value="{!rec.InvoiceModel.Total}" headerValue="Amount"/>
+          <apex:column value="{!rec.InvoiceModel.InvoiceDateString}" headerValue="Invoice Date"/>
+           <apex:column value="{!rec.InvoiceModel.DueDateString}" headerValue="Due Date"/>
+    </apex:pageBlockTable>
+  <apex:pageBlockButtons >
+  <apex:commandbutton action="{!saveSelectedInvoices}" value="Save Selected Invoices" /> 
+  </apex:pageBlockButtons>
+  </apex:pageBlock>
+  </apex:form>
+
+</apex:page>

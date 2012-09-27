@@ -1,0 +1,100 @@
+<apex:page >
+  <BR />
+  <h1>Please select one or more Xero Invoices to attach to this Opportunity</h1>
+  <BR />
+  <table>
+    <tr style="border: 1px solid black; padding: 3px">
+      <th></th>
+      <th style="border: 1px solid black; padding: 3px">Invoice Number</th>
+      <th style="border: 1px solid black; padding: 3px">Xero Account Name</th>
+      <th style="border: 1px solid black; padding: 3px">Amount</th>
+      <th style="border: 1px solid black; padding: 3px">Invoice Date</th>
+      <th style="border: 1px solid black; padding: 3px">Due Date</th>
+      <th style="border: 1px solid black; padding: 3px">Recently<BR />Added</th>  
+      <th style="border: 1px solid black; padding: 3px">Similar<br />Company<br />Name</th>
+      <th style="border: 1px solid black; padding: 3px">Other<br />Invoices<br />Already<br />Matched</th>            
+    </tr>
+    <tr>
+      <td><apex:form ><apex:inputCheckbox /></apex:form></td>
+      <td>INV-00635</td>
+      <td>Tokyo Corporation</td>
+      <td>£ 6,500</td>
+      <td>3 August 2012</td>
+      <td>3 September 2012</td>
+      <td><img src="http://images4.wikia.nocookie.net/__cb20060902052330/uncyclopedia/images/6/63/Checkbox_true.png" /></td>     
+      <td></td>     
+      <td><img src="http://images4.wikia.nocookie.net/__cb20060902052330/uncyclopedia/images/6/63/Checkbox_true.png" /></td>                  
+    </tr>
+    <tr>
+      <td><apex:form ><apex:inputCheckbox /></apex:form></td>
+      <td>INV-00631</td>
+      <td>Pacific Corporation</td>
+      <td>£ 8,500</td>
+      <td>3 August 2012</td>
+      <td>3 September 2012</td>
+      <td><img src="http://images4.wikia.nocookie.net/__cb20060902052330/uncyclopedia/images/6/63/Checkbox_true.png" /></td>     
+      <td></td>     
+      <td></td>                  
+    </tr>
+    <tr>
+      <td><apex:form ><apex:inputCheckbox /></apex:form></td>
+      <td>INV-00625</td>
+      <td>Smoth Corporation</td>
+      <td>£ 6,500</td>
+      <td>3 August 2012</td>
+      <td>3 September 2012</td>
+      <td></td>     
+      <td></td>     
+      <td><img src="http://images4.wikia.nocookie.net/__cb20060902052330/uncyclopedia/images/6/63/Checkbox_true.png" /></td>                  
+    </tr>
+    <tr>
+      <td><apex:form ><apex:inputCheckbox /></apex:form></td>
+      <td>INV-00618</td>
+      <td>Acme Corporation</td>
+      <td>£ 1,875</td>
+      <td>3 August 2012</td>
+      <td>3 September 2012</td>
+      <td></td>     
+      <td><img src="http://images4.wikia.nocookie.net/__cb20060902052330/uncyclopedia/images/6/63/Checkbox_true.png" /></td>     
+      <td></td>                  
+    </tr>
+    <tr>
+      <td><apex:form ><apex:inputCheckbox /></apex:form></td>
+      <td>INV-00615</td>
+      <td>Acme Corporation</td>
+      <td>£ 3,500</td>
+      <td>3 August 2012</td>
+      <td>3 September 2012</td>
+      <td></td>     
+      <td><img src="http://images4.wikia.nocookie.net/__cb20060902052330/uncyclopedia/images/6/63/Checkbox_true.png" /></td>     
+      <td></td>                  
+    </tr>
+
+
+  </table>
+  <br/>
+  All of the invoices listed above are not currently matched to a Salesforce Opportunity and were suggested because either the 
+  Xero Invoices were either recently added, or the Salesforce Account name is similar to the Xero Account name, or because this
+  Opportunity or another Opportunity on the same Salesforce Account is already matched to a Xero Invoice on the same Xero Account.<br/><br/>
+  
+  However, you may not find the invoice you are looking for above. To enter one or more invoices manually, you can either
+  <a href="./">click here [dead link]</a> for
+  a list of the 200 most recently added invoices, or <a href="./">click here [dead link]</a> for a list of all unmatched
+  invoices (warning, this page may take a while to load).<br/><br/>
+  Or you may enter invoice numbers manually below. To enter multiple invoices, seperate them by a single comma.<br/>
+  <apex:form ><apex:inputText /></apex:form> [Submit Button]
+  
+  <hr />
+  <h1>Developers Notes</h1>
+  The above page is styled badly - I do not have any graphic skill. It should look a lot more like standard View.
+  But the over-all idea should be the same. A list of unmatched invoices is presented, in descending order by invoice number.
+  (this way the most recently created invoice is at the top).
+  The amount of the invoice and the company should be listed, as well as the Invoice Date and Due Date.
+  The reason those invoices were suggested, such as recently created, or similar to Account name or previously matched on
+  SF Account, should also be indicated.<br/><br/>
+  Also, only 5 invoices are listed, but I think this should be a range of 10-20 invoices. How to select how many, and how to get
+  a mix of the three suggestions, is potentially a complicated excercise. For the time being, do not put much focus on this, as 
+  it will likely change during beta testing.<br/><br/>
+  Also, just to be clear, the checkbox on the far left should be actionable by the user. The checkboxes for the reason why an invoice
+  is suggested are just indicators, and should never be unchecked or checked by the user. This functionality is reproduced accurately above.
+</apex:page>

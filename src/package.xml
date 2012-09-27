@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Package xmlns="http://soap.sforce.com/2006/04/metadata">
+    <types>
+        <members>*</members>
+        <name>ApexClass</name>
+    </types>
+    <types>
+        <members>*</members>
+        <name>ApexPage</name>
+    </types>
+    <types>
+        <members>*</members>
+        <name>CustomApplication</name>
+    </types>
+    <types>
+        <members>Invoice__c</members>
+        <members>Xero_App_Config__c</members>
+        <members>Xero_Saved_URL__c</members>
+        <members>Xero_Service__c</members>
+        <members>Xero_Token__c</members>
+        <name>CustomObject</name>
+    </types>
+    <types>
+        <members>*</members>
+        <name>CustomTab</name>
+    </types>
+    <types>
+        <members>Xero_Connect</members>
+        <members>Xero_Connect/Xero_Logo.jpg</members>
+        <members>Xero_Connect/Xero_Logo_Low_Res.jpg</members>
+        <name>Document</name>
+    </types>
+    <version>25.0</version>
+</Package>
