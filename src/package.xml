@@ -1,15 +1,35 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <Package xmlns="http://soap.sforce.com/2006/04/metadata">
     <types>
-        <members>*</members>
+        <members>CustomException</members>
+        <members>InvoiceController</members>
+        <members>OAuth</members>
+        <members>OAuthRequest</members>
+        <members>OpportunityExtension</members>
+        <members>SalesforceXeroInvoiceWrapper</members>
+        <members>XeroAppConfigController</members>
+        <members>XeroController</members>
+        <members>XeroInvoiceModel</members>
+        <members>XeroInvoiceModelWrapper</members>
+        <members>XeroInvoiceService</members>
+        <members>XeroPrivateAuthTest</members>
+        <members>XeroTestController</members>
         <name>ApexClass</name>
     </types>
     <types>
-        <members>*</members>
+        <members>CompleteAuth</members>
+        <members>InvoiceMultiUpdateFromXero</members>
+        <members>InvoiceUpdateFromXero</members>
+        <members>InvoicesAddFromXero</members>
+        <members>InvoicesAddFromXeroNew</members>
+        <members>SelectInvoiceMockup</members>
+        <members>XeroAppConfig</members>
+        <members>XeroAuthentication</members>
+        <members>XeroTestPage</members>
         <name>ApexPage</name>
     </types>
     <types>
-        <members>*</members>
+        <members>Xero_Connect</members>
         <name>CustomApplication</name>
     </types>
     <types>
@@ -21,7 +41,12 @@
         <name>CustomObject</name>
     </types>
     <types>
-        <members>*</members>
+        <members>Authorise_Xero</members>
+        <members>Invoice__c</members>
+        <members>Select_Invoice_Mockup</members>
+        <members>Xero_Service__c</members>
+        <members>Xero_Sync_Settings</members>
+        <members>Xero_Tester</members>
         <name>CustomTab</name>
     </types>
     <types>

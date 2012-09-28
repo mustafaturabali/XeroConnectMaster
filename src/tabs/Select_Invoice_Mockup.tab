@@ -1,8 +1,0 @@
-<?xml version="1.0" encoding="UTF-8"?>
-<CustomTab xmlns="http://soap.sforce.com/2006/04/metadata">
-    <description>Mockup by Stony for Select Invoice Page</description>
-    <label>Select Invoice Mockup</label>
-    <mobileReady>false</mobileReady>
-    <motif>Custom47: Chess piece</motif>
-    <page>SelectInvoiceMockup</page>
-</CustomTab>

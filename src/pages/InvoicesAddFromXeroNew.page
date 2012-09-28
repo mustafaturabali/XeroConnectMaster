@@ -1,90 +1,73 @@
 <apex:page standardcontroller="Opportunity" extensions="OpportunityExtension" action="{!FetchInvoicesToAddFromXero}">
-<apex:pagemessages />
-  <BR />
-  <h1>Please select one or more Xero Invoices to attach to this Opportunity</h1>
-  <BR />
-    <apex:form >
-  <apex:pageBlock title="" >
-  <!-- <table> -->
-   <!--  <tr style="border: 1px solid black; padding: 3px">
-      <th></th>
-      <th style="border: 1px solid black; padding: 3px">Invoice Number</th>
-      <th style="border: 1px solid black; padding: 3px">Xero Account Name</th>
-      <th style="border: 1px solid black; padding: 3px">Amount</th>
-      <th style="border: 1px solid black; padding: 3px">Invoice Date</th>
-      <th style="border: 1px solid black; padding: 3px">Due Date</th>
-      <th style="border: 1px solid black; padding: 3px">Recently<BR />Added</th>  
-      <th style="border: 1px solid black; padding: 3px">Similar<br />Company<br />Name</th>
-      <th style="border: 1px solid black; padding: 3px">Other<br />Invoices<br />Already<br />Matched</th>            
-    </tr> -->
-    
-    <apex:pageBlockTable value="{!XeroInvoicesEditable}" var="rec">
-    <apex:column >
-      <apex:inputCheckbox value="{!rec.IsSelected}"/>
-     </apex:column> 
-     
-       <apex:column value="{!rec.InvoiceModel.InvoiceNumber}" headerValue="Invoice Number"/>
-        <apex:column value="{!rec.InvoiceModel.ContactName}" headerValue="Xero Account Name"/>
-         <apex:column value="{!rec.InvoiceModel.Total}" headerValue="Amount"/>
-          <apex:column value="{!rec.InvoiceModel.InvoiceDateString}" headerValue="Invoice Date"/>
-           <apex:column value="{!rec.InvoiceModel.DueDateString}" headerValue="Due Date"/>
-      
-     <apex:column headerValue="Recently Added"> <input type="checkbox" checked="checked" disabled="true" style="display:{!IF(rec.IsRecent==true,'blocked','none')}"/>  </apex:column>   
-    <apex:column headerValue="Similar Company Name">  <input type="checkbox" checked="checked" disabled="true" style="display:{!IF(rec.IsSimilarAccountName==true,'blocked','none')}"/></apex:column>     
-     <apex:column headerValue="Other Invoices Already Matched" > <input type="checkbox" checked="checked" disabled="true" style="display:{!IF(rec.IsOtherMatchingInvoices==true,'blocked','none')}"/></apex:column>
-     
-    </apex:pageBlockTable>
-	
-  <!-- </table> -->
+  	<H2>Please select one or more Xero Invoices to attach to Opportunity&nbsp;{!Opportunity.Name} -&nbsp;{!Opportunity.Id}</H2>
+  		<BR />
+    	<apex:form >
+  			<apex:pageBlock title="Recommended Invoices">
   
-  <apex:pageBlockButtons >
-  <apex:commandbutton action="{!saveSelectedInvoices}" value="Save Selected Invoices" /> 
-  </apex:pageBlockButtons>
-  </apex:pageBlock>
+				<!-- <table> -->
+				   	<!--  <tr style="border: 1px solid black; padding: 3px">
+				      <th></th>
+				      <th style="border: 1px solid black; padding: 3px">Invoice Number</th>
+				      <th style="border: 1px solid black; padding: 3px">Xero Account Name</th>
+				      <th style="border: 1px solid black; padding: 3px">Amount</th>
+				      <th style="border: 1px solid black; padding: 3px">Invoice Date</th>
+				      <th style="border: 1px solid black; padding: 3px">Due Date</th>
+				      <th style="border: 1px solid black; padding: 3px">Recently<BR />Added</th>  
+				      <th style="border: 1px solid black; padding: 3px">Similar<br />Company<br />Name</th>
+				      <th style="border: 1px solid black; padding: 3px">Other<br />Invoices<br />Already<br />Matched</th>            
+				    </tr> -->
+			    
+					    <apex:pageBlockTable value="{!XeroInvoicesEditable}" var="rec">
+					       <apex:column ><apex:inputCheckbox value="{!rec.IsSelected}"/></apex:column>
+					       <apex:column value="{!rec.InvoiceModel.InvoiceNumber}" headerValue="Invoice Number"/>
+					       <apex:column value="{!rec.InvoiceModel.ContactName}" headerValue="Xero Account Name"/>
+					       <apex:column style="text-align:right"><apex:outputText value="{0, number, #,###.00}"> <apex:param value="{!rec.InvoiceModel.Total}"/></apex:outputText><apex:facet name="header">Amount</apex:facet></apex:column>
+					       <apex:column value="{!rec.InvoiceModel.InvoiceDateString}" headerValue="Invoice Date"/>
+					       <apex:column value="{!rec.InvoiceModel.DueDateString}" headerValue="Due Date"/>
+					       <apex:column style="text-align:center" headerValue="Recently Added"> <input type="checkbox" checked="checked" disabled="true" style="display:{!IF(rec.IsRecent==true,'blocked','none')}"/>  </apex:column>   
+					       <apex:column style="text-align:center" headerValue="Similar Company Name">  <input type="checkbox" checked="checked" disabled="true" style="display:{!IF(rec.IsSimilarAccountName==true,'blocked','none')}"/></apex:column>     
+					       <apex:column style="text-align:center" headerValue="Other Invoices Matched" > <input type="checkbox" checked="checked" disabled="true" style="display:{!IF(rec.IsOtherMatchingInvoices==true,'blocked','none')}"/></apex:column>
+					    </apex:pageBlockTable>
+				
+			  <!-- </table> -->
+			  
+				  <apex:pageBlockButtons >
+					  <apex:commandbutton action="{!saveSelectedInvoices}" value="Save Selected Invoices" /> 
+					  <apex:commandbutton action="{!GotoAddNewInvoicesPage}" value="View All Unmatched Invoices" />
+				  </apex:pageBlockButtons>
+		  </apex:pageBlock>
+		  <apex:pageBlock title="Invoice Recommendations Help">
+		  		
+		  	  Key:<br />
+			  Recently Added - Invoices recently added to Xero<br />
+			  Similar Company Name - Salesforce Account Name is similar to Xero Account Name<br />
+			  Other Invoices Matched - This or another Opportunity on the same Salesforce Account is already matched to a Xero Invoice on the same Xero Account<br />
+			  <br />
+			  To view a list of all unmatched Xero invoices click the View All Unmatched Invoices button. Please note this page may take a while to load if there are a lot of records.
+			  <br />
+		</apex:pageBlock>
   </apex:form>
-  <br/>
-  <apex:form >
-  <apex:pageBlock >
-  All of the invoices listed above are not currently matched to a Salesforce Opportunity and were suggested because either the 
-  Xero Invoices were either recently added, or the Salesforce Account name is similar to the Xero Account name, or because this
-  Opportunity or another Opportunity on the same Salesforce Account is already matched to a Xero Invoice on the same Xero Account.<br/><br/>
   
-  However, you may not find the invoice you are looking for above. To enter one or more invoices manually, you can <apex:commandlink value="Click here" action="{!GotoAddNewInvoicesPage}" /> for a list of all unmatched
-  invoices (warning, this page may take a while to load).<br/><br/>
-  Or you may enter invoice numbers manually below. To enter multiple invoices, seperate them by a single comma.<br/>
-  </apex:pageBlock>
-  </apex:form>
   <apex:form >
-  	<apex:inputText value="{!XeroInvoiceNumber}" /> <br />
-  	<apex:commandButton value="Search" action="{!FindInvoiceByNumber}" />
-  </apex:form>
+	  <apex:pageBlock title="Search For An Invoice">
+		  Enter an invoice number below to search for it on Xero:<br/>
+		  <apex:inputText value="{!XeroInvoiceNumber}" /> <br />
+		  <apex:commandButton value="Search" action="{!FindInvoiceByNumber}" />
+		<apex:pagemessages /><br />
+		<br />
   <apex:outputpanel rendered="{!InvoiceFound}">
-  <apex:form >
-  <apex:pageBlock >
-  <div>Invoice found. Please select the checkbox to save the invoice.</div>
-   <apex:pageBlockTable value="{!XeroInvoiceSearchResults}" var="rec">
-      <apex:column ><apex:inputCheckbox value="{!rec.IsSelected}"/></apex:column>
-      <apex:column value="{!rec.InvoiceModel.InvoiceNumber}" headerValue="Invoice Number"/>
-     <apex:column value="{!rec.InvoiceModel.ContactName}" headerValue="Xero Account Name"/>
-      <apex:column value="{!rec.InvoiceModel.Total}" headerValue="Amount"/>
-      <apex:column value="{!rec.InvoiceModel.InvoiceDateString}" headerValue="Invoice Date"/>
-      <apex:column value="{!rec.InvoiceModel.DueDateString}" headerValue="Due Date"/>
-      </apex:pageBlockTable>
-  <apex:commandbutton action="{!saveSearchedInvoice}" value="Save Selected Invoice" />
+			  <div>Invoice found!</div>
+				   <apex:pageBlockTable value="{!XeroInvoiceSearchResults}" var="rec">
+				      <apex:column ><apex:inputCheckbox value="{!rec.IsSelected}"/></apex:column>
+				      <apex:column value="{!rec.InvoiceModel.InvoiceNumber}" headerValue="Invoice Number"/>
+				      <apex:column value="{!rec.InvoiceModel.ContactName}" headerValue="Xero Account Name"/>
+				      <apex:column style="text-align:right"><apex:outputText value="{0, number, #,###.00}"> <apex:param value="{!rec.InvoiceModel.Total}"/></apex:outputText><apex:facet name="header">Amount</apex:facet></apex:column>
+				      <apex:column value="{!rec.InvoiceModel.InvoiceDateString}" headerValue="Invoice Date"/>
+				      <apex:column value="{!rec.InvoiceModel.DueDateString}" headerValue="Due Date"/>
+				  	</apex:pageBlockTable>
+			  <apex:commandbutton action="{!saveSearchedInvoice}" value="Save Selected Invoice" />
+  </apex:outputpanel>
   </apex:pageBlock>
   </apex:form>
-  </apex:outputpanel>
   <hr />
- <!--  <h1>Developers Notes</h1>
-  The above page is styled badly - I do not have any graphic skill. It should look a lot more like standard View.
-  But the over-all idea should be the same. A list of unmatched invoices is presented, in descending order by invoice number.
-  (this way the most recently created invoice is at the top).
-  The amount of the invoice and the company should be listed, as well as the Invoice Date and Due Date.
-  The reason those invoices were suggested, such as recently created, or similar to Account name or previously matched on
-  SF Account, should also be indicated.<br/><br/>
-  Also, only 5 invoices are listed, but I think this should be a range of 10-20 invoices. How to select how many, and how to get
-  a mix of the three suggestions, is potentially a complicated excercise. For the time being, do not put much focus on this, as 
-  it will likely change during beta testing.<br/><br/>
-  Also, just to be clear, the checkbox on the far left should be actionable by the user. The checkboxes for the reason why an invoice
-  is suggested are just indicators, and should never be unchecked or checked by the user. This functionality is reproduced accurately above. -->
 </apex:page>

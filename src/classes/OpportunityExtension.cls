@@ -1,5 +1,5 @@
 public with sharing class OpportunityExtension {
-	private Id opportunityId;
+	public Id opportunityId;
 	private Opportunity thisOpportunity;
 	public List<XeroInvoiceModel> xeroInvoices {get; set;}
 	public XeroInvoiceModelWrapper XeroSearchedInvoice {get; set;}	
@@ -85,7 +85,7 @@ public with sharing class OpportunityExtension {
 		public void showNewXeroInvoices(){
 		XeroInvoiceService obj = new XeroInvoiceService();
 		xeroInvoicesEditable = new List<XeroInvoiceModelWrapper>();
-		List<XeroInvoiceModel> xeroInvoicesUnFiltered = obj.FetchInvoices(null, null, null, null);
+		List<XeroInvoiceModel> xeroInvoicesUnFiltered = obj.FetchInvoices(null, null, null, 'DueDate');
 		if(obj.success==false) {
 			apexpages.addMessage(new apexpages.Message(apexpages.severity.error, obj.message));
 			return;		
@@ -137,7 +137,7 @@ public with sharing class OpportunityExtension {
 			}
 		}
 		else {
-			Apexpages.addMessage(new Apexpages.message(Apexpages.severity.Error, 'Please provide a valid Xero Invoice Number or Invoice Id for finding the invoice'));	
+			Apexpages.addMessage(new Apexpages.message(Apexpages.severity.Error, 'Please provide a valid Xero Invoice Number'));	
 		}
 	}
 	
@@ -149,7 +149,7 @@ public with sharing class OpportunityExtension {
 				insert invoiceRecord;
 				InvoiceFound = false;
 				XeroSearchedInvoice = null; 
-				return new PageReference('/'+invoiceRecord.Id);
+				return new pagereference('/'+this.opportunityId);
 			}
 			catch(Exception ex) {
 				Apexpages.addMessages(ex);
@@ -191,5 +191,9 @@ public with sharing class OpportunityExtension {
 	
 	public pagereference GotoAddNewInvoicesPage() {
 		return new Pagereference('/apex/InvoicesAddFromXero?id='+opportunityId);
+	}
+	
+	public pagereference GotoRecommendedInvoicesPage() {
+		return new Pagereference('/apex/InvoicesAddFromXeroNew?id='+opportunityId);
 	}
 }

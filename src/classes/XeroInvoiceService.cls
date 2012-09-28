@@ -4,7 +4,7 @@ public with sharing class XeroInvoiceService {
     public string status {get; private set;}
     public string responseBody {get; private set;}
     public boolean success {get; private set;}
-    public Xero_Service__c service;
+    //public Xero_Service__c service;
      
     public XeroInvoiceModel FetchInvoice(string InvoiceNumber) {
         List<XeroInvoiceModel> invoices = this.FetchInvoices(InvoiceNumber, null, null, null);
@@ -45,7 +45,7 @@ public with sharing class XeroInvoiceService {
     
     public void FetchResponse(HttpRequest req) {
         Http h = new Http();
-        system.debug('our request :'+req);
+        system.debug(LoggingLevel.DEBUG,'our request :'+req);
         HttpResponse res = h.send(req);
 
         status = res.getStatus();
@@ -68,17 +68,17 @@ public with sharing class XeroInvoiceService {
         return invoices;
     }
     
-    private static Xero_Service__c FetchPrivateApplicationSettings() {
-        List<Xero_Service__c> lst = [Select x.Request_Token_URL__c, x.PKCS_Private_Key__c, x.Name, 
-                x.Id, x.Consumer_Secret__c, x.Consumer_Key__c, x.Authorisation_URL__c, 
-                x.Application_Type__c, x.Access_Token_URL__c, x.API_Endpoint_URL__c 
-                From Xero_Service__c x
-                Where Name= 'Test'];
-        if(lst.size()>0) {
-            return lst[0];
-        }       
-        return null;
-    }
+    //private static Xero_Service__c FetchPrivateApplicationSettings() {
+    //    List<Xero_Service__c> lst = [Select x.Request_Token_URL__c, x.PKCS_Private_Key__c, x.Name, 
+    //            x.Id, x.Consumer_Secret__c, x.Consumer_Key__c, x.Authorisation_URL__c, 
+    //            x.Application_Type__c, x.Access_Token_URL__c, x.API_Endpoint_URL__c 
+    //            From Xero_Service__c x
+    //            Where Name= 'Test'];
+    //    if(lst.size()>0) {
+    //        return lst[0];
+    //    }       
+    //    return null;
+    //}
     
     private void SignRequest(HttpRequest req) {
         //service = FetchPrivateApplicationSettings();
@@ -86,7 +86,7 @@ public with sharing class XeroInvoiceService {
         //throw new CustomException('Xero Private Application settings not found');
         //}
         
-        OAuth oa = new OAuth();
+        OAuthRequest oa = new OAuthRequest();
      //   oa.setService(service);
        // oa.signRSA(req);
         oa.signRSANew(req);
