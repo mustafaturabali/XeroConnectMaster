@@ -133,7 +133,7 @@ public with sharing class OpportunityExtension {
 				InvoiceFound = true;
 			} 
 			else {
-				Apexpages.addMessage(new Apexpages.message(Apexpages.severity.info, 'Invoice #'+XeroInvoiceNumber+' not found in Xero Invoice records'));
+				Apexpages.addMessage(new Apexpages.message(Apexpages.severity.Error, 'Invoice '+XeroInvoiceNumber+' not found in Xero Invoice records'));
 			}
 		}
 		else {

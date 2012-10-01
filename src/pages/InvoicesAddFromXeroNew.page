@@ -51,10 +51,9 @@
   <apex:form >
 	  <apex:pageBlock title="Search For An Invoice">
 		  Enter an invoice number below to search for it on Xero:<br/>
-		  <apex:inputText value="{!XeroInvoiceNumber}" /> <br />
-		  <apex:commandButton value="Search" action="{!FindInvoiceByNumber}" />
-		<apex:pagemessages /><br />
-		<br />
+		  <apex:inputText value="{!XeroInvoiceNumber}" /><br />
+		  <apex:commandButton value="Search" action="{!FindInvoiceByNumber}" /><br />
+		  <br />
   <apex:outputpanel rendered="{!InvoiceFound}">
 			  <div>Invoice found!</div>
 				   <apex:pageBlockTable value="{!XeroInvoiceSearchResults}" var="rec">
@@ -67,6 +66,7 @@
 				  	</apex:pageBlockTable>
 			  <apex:commandbutton action="{!saveSearchedInvoice}" value="Save Selected Invoice" />
   </apex:outputpanel>
+  <apex:pagemessages />
   </apex:pageBlock>
   </apex:form>
   <hr />
