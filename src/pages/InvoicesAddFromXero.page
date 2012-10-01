@@ -1,19 +1,23 @@
-<apex:page controller="OpportunityExtension" tabStyle="Opportunity" action="{!showNewXeroInvoices}">
-<apex:pagemessages ></apex:pagemessages>
+<apex:page standardcontroller="Opportunity" tabStyle="Opportunity" extensions="OpportunityExtension" action="{!showNewXeroInvoices}">
+<apex:pagemessages />
+  <BR />
+  <H2>Please select one or more Xero Invoices to attach to Opportunity&nbsp;{!Opportunity.Name} -&nbsp;{!Opportunity.Id}</H2>
+  <BR />
   <apex:form >
-  <apex:pageBlock >
+  <apex:pageBlock title="All Unmatched Invoices">
  <apex:pageBlockTable value="{!XeroInvoicesEditable}" var="rec">
     <apex:column >
       <apex:inputCheckbox value="{!rec.IsSelected}"/>
      </apex:column> 
        <apex:column value="{!rec.InvoiceModel.InvoiceNumber}" headerValue="Invoice Number"/>
         <apex:column value="{!rec.InvoiceModel.ContactName}" headerValue="Xero Account Name"/>
-         <apex:column value="{!rec.InvoiceModel.Total}" headerValue="Amount"/>
+         <apex:column style="text-align:right"><apex:outputText value="{0, number, #,###.00}"> <apex:param value="{!rec.InvoiceModel.Total}"/></apex:outputText><apex:facet name="header">Amount</apex:facet></apex:column>
           <apex:column value="{!rec.InvoiceModel.InvoiceDateString}" headerValue="Invoice Date"/>
            <apex:column value="{!rec.InvoiceModel.DueDateString}" headerValue="Due Date"/>
     </apex:pageBlockTable>
   <apex:pageBlockButtons >
-  <apex:commandbutton action="{!saveSelectedInvoices}" value="Save Selected Invoices" /> 
+  <apex:commandbutton action="{!saveSelectedInvoices}" value="Save Selected Invoices" />
+  <apex:commandbutton action="{!GotoRecommendedInvoicesPage}" value="View Recommended Invoices" />
   </apex:pageBlockButtons>
   </apex:pageBlock>
   </apex:form>
